@@ -43,20 +43,18 @@ game.start()
 
 document.addEventListener('keyup', (even) => {
     let card = game.cardArray[0]
-    console.log(card)
     switch(event.key){
         case "ArrowLeft":
-            console.log(game.cardArray[0].bottomRow)
-            game.cardArray[0].moveHorizontally('left', "0")
+            card.moveHorizontally('left', "0")
             break
         case "ArrowRight":
-            game.cardArray[0].moveHorizontally('right', "3")
+            card.moveHorizontally('right', "3")
             break
         case "ArrowUp":
-            game.cardArray[0].moveVertically('up', '0')
+            card.moveVertically('up', '0')
             break
         case "ArrowDown":
-            game.cardArray[0].moveVertically('down', '3')
+            card.moveVertically('down', '3')
             break
     }
 })
