@@ -1,0 +1,26 @@
+
+
+
+
+.board {
+    width: 500px;
+    aspect-ratio: 1;
+    border: solid 1px black;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto; 
+    justify-content: space-around;
+}
+
+.grid-square {
+    border: solid 1px black;
+    width: 100px;
+    aspect-ratio: 1;
+    margin: 10px;
+    font-size: 32px;
+    text-align: center;
+}
+
+.grid-square div {
+    
+}
