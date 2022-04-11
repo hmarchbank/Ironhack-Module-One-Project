@@ -24,8 +24,6 @@ function drawBoard(tileArray){
 
 function updateBoard(topRow, secondRow, thirdRow, fourthRow){
     let board = document.getElementById('board')
-    board.innerHTML = []
-    console.log(secondRow)
     for (let i = 0; i < topRow.length; i++){
         board.appendChild(topRow[i])
     }
@@ -44,8 +42,11 @@ const game = new Game(createGridElement, drawBoard)
 game.start()
 
 document.addEventListener('keyup', (even) => {
+    let card = game.cardArray[0]
+    console.log(card)
     switch(event.key){
         case "ArrowLeft":
+            console.log(game.cardArray[0].bottomRow)
             game.cardArray[0].moveHorizontally('left', "0")
             break
         case "ArrowRight":

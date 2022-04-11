@@ -65,8 +65,69 @@ class Card {
     }
 
     moveHorizontally(direction, id) {
-        
+        if (direction === "left" || direction === "right"){
+            this.cardArray.forEach(element => {
+                if (this.topRow.length < 4) {
+                    this.topRow.push(element)
+                } else if (this.secondRow.length < 4) {
+                    this.secondRow.push(element)
+                } else if (this.thirdRow.length < 4) {
+                    this.thirdRow.push(element)
+                } else if (this.bottomRow.length < 4) {
+                    this.bottomRow.push(element)
+                }
+            })
+        }
 
+
+        // this.generateId(this.topRow)
+        // this.generateId(this.secondRow)
+        // this.generateId(this.thirdRow)
+        // this.generateId(this.bottomRow)
+
+
+        this.moveRowsHorizontally(this.topRow, direction, id)
+        this.moveRowsHorizontally(this.secondRow, direction, id)
+        this.moveRowsHorizontally(this.thirdRow, direction, id)
+        this.moveRowsHorizontally(this.bottomRow, direction, id)
+
+        // this.leftColumn = []
+        // this.midLeftColumn = []
+        // this.midRightColumn = []
+        // this.rightColumn = []
+
+        // this.updateBoard(this.topRow, this.secondRow, this.thirdRow, this.bottomRow)
+        
+    }
+
+    moveVertically(direction, id){
+        for (let i = 0; i < this.cardArray.length; i++){
+            if (this.cardArray[i].id === '0'){
+            this.leftColumn.push(this.cardArray[i])
+            } else if (this.cardArray[i].id === '1'){
+                this.midLeftColumn.push(this.cardArray[i])
+            } else if (this.cardArray[i].id === '2'){
+                this.midRightColumn.push(this.cardArray[i])
+            } else if (this.cardArray[i].id === '3'){
+                this.rightColumn.push(this.cardArray[i])
+            }
+        }
+
+        // prepares arrays for vertical movement
+        this.generateId(this.leftColumn)
+        this.generateId(this.midLeftColumn)
+        this.generateId(this.midRightColumn)
+        this.generateId(this.rightColumn)
+
+
+        
+        this.moveRowsHorizontally(this.leftColumn, direction, id)
+        this.moveRowsHorizontally(this.midLeftColumn, direction, id)
+        this.moveRowsHorizontally(this.midRightColumn, direction, id)
+        this.moveRowsHorizontally(this.rightColumn, direction, id)
+
+
+        //  Return arrays to original state
         this.cardArray.forEach(element => {
             if (this.topRow.length < 4) {
                 this.topRow.push(element)
@@ -84,57 +145,13 @@ class Card {
         this.generateId(this.thirdRow)
         this.generateId(this.bottomRow)
 
-        console.log(this.topRow)
 
-        this.moveRowsHorizontally(this.topRow, direction, id)
-        this.moveRowsHorizontally(this.secondRow, direction, id)
-        this.moveRowsHorizontally(this.thirdRow, direction, id)
-        this.moveRowsHorizontally(this.bottomRow, direction, id)
-
-        this.updateBoard(this.topRow, this.secondRow, this.thirdRow, this.bottomRow)
+        this.leftColumn = []
+        this.midLeftColumn = []
+        this.midRightColumn = []
+        this.rightColumn = []
         
-    }
-
-    moveVertically(direction, id){
-        // this.cardArray.forEach( element =>{
-        //     if (element.id === "0") {
-        //         this.leftColumn.push(element)
-        //     } else if (element.id === '1') {
-        //         this.midLeftColumn.push(element)
-        //     } else if (element.id === '2') {
-        //         this.midRightColumn.push(element)
-        //     } else if (element.id === '3') {
-        //         this.rightColumn.push(element)
-        //     }
-        // })
-
-        this.cardArray.forEach(element => {
-            if (this.topRow.length < 4) {
-                this.leftColumn.push(element)
-            } else if (this.midLeftColumn.length < 4) {
-                this.midLeftColumn.push(element)
-            } else if (this.midRightColumn.length < 4) {
-                this.midRightColumn.push(element)
-            } else if (this.rightColumn.length < 4) {
-                this.rightColumn.push(element)
-            }
-        })
-
-        console.log(this.cardArray)
-
-        
-        this.generateId(this.leftColumn)
-        this.generateId(this.midLeftColumn)
-        this.generateId(this.midRightColumn)
-        this.generateId(this.rightColumn)
-        
-        this.moveRowsVerically(this.leftColumn, direction, id)
-        this.moveRowsVerically(this.midLeftColumn, direction, id)
-        this.moveRowsVerically(this.midRightColumn, direction, id)
-        this.moveRowsVerically(this.rightColumn, direction, id)
-        
-        console.log(this.midLeftColumn)
-        this.updateBoard(this.leftColumn, this.midLeftColumn, this.midRightColumn, this.rightColumn)
+        // this.updateBoard(this.leftColumn, this.midLeftColumn, this.midRightColumn, this.rightColumn)
     }
 
     generateId(array){
@@ -144,38 +161,8 @@ class Card {
     }
 
     moveRowsVerically(row, direction, id){
-        if (direction === 'up') {
-            row.reverse()
-        }
-        row.forEach((element, index) => {
-            if (index >= 1) {
-                index--
-            }
-            if (element.textContent) {
-                if (element.id === id) {
-                    // make sure the elements can't move out of bounds
-                } 
-                 if (row[index].textContent) {
-                    if (row[index].textContent === element.textContent) {
-                        row[index].textContent *= 2
-                        element.textContent = ''
-                    }
-                } else {
-                    row[index].textContent = element.textContent
-                    element.textContent = ""
-                }
-            }
-        })
-        if (direction === 'right') {
-            row.reverse()
-        }
-    }
-
-
-
-
-    moveRowsHorizontally(row, direction, id) {
-        if (direction === 'right') {
+        console.log(row)
+        if (direction === 'down') {
             row.reverse()
         }
         row.forEach((element, index) => {
@@ -196,7 +183,37 @@ class Card {
                 }
             }
         })
-        if (direction === 'right') {
+        if (direction === 'down') {
+            row.reverse()
+        }
+    }
+
+
+
+
+    moveRowsHorizontally(row, direction, id) {
+        if (direction === 'right' ||  direction === 'down') {
+            row.reverse()
+        }
+        row.forEach((element, index) => {
+            if (index >= 1) {
+                index--
+            }
+            if (element.textContent) {
+                if (element.id === id) {
+                    // make sure the elements can't move out of bounds
+                } else if (row[index].textContent) {
+                    if (row[index].textContent === element.textContent) {
+                        row[index].textContent *= 2
+                        element.textContent = ''
+                    }
+                } else {
+                    row[index].textContent = element.textContent
+                    element.textContent = ""
+                }
+            }
+        })
+        if (direction === 'right' || direction === 'down') {
             row.reverse()
         }
     }
