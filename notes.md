@@ -13,6 +13,7 @@ Add new cards in direction of movement
 
 Stretch goals:
 
+buttons and functionality
 Way of scoring
 add 1 + 2 as initial numbers?
 UX

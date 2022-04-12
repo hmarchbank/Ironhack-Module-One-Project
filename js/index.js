@@ -12,18 +12,19 @@ function createGridElement(number, id){
     return div
 }
 
-function getTileArray(){
-    return this.tileArray
-}
-
 function drawBoard(tileArray){
     tileArray.forEach(div => {
         document.getElementById('board').appendChild(div)
     });
 }
 
-const game = new Game(createGridElement, drawBoard)
+function updateScoreDom(score){
+    document.getElementById('score-el').textContent = score
+}
+
+const game = new Game(createGridElement, drawBoard, updateScoreDom)
 game.start()
+game.cardArray[0].getClass()
 
 document.addEventListener('keyup', (even) => {
     let card = game.cardArray[0]
