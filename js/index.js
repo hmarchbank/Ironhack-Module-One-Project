@@ -22,22 +22,6 @@ function drawBoard(tileArray){
     });
 }
 
-function updateBoard(topRow, secondRow, thirdRow, fourthRow){
-    let board = document.getElementById('board')
-    for (let i = 0; i < topRow.length; i++){
-        board.appendChild(topRow[i])
-    }
-    for (let i = 0; i < topRow.length; i++){
-        board.appendChild(secondRow[i])
-    }
-    for (let i = 0; i < topRow.length; i++){
-        board.appendChild(thirdRow[i])
-    }
-    for (let i = 0; i < topRow.length; i++){
-        board.appendChild(fourthRow[i])
-    }
-}
-
 const game = new Game(createGridElement, drawBoard)
 game.start()
 
