@@ -1,47 +1,155 @@
 
 
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background-color: aqua;
+}
 
+
+  /*     GAME STYLES        */
+
+  .container{
+    margin: 50px auto;
+  }
 
 .board {
     width: 500px;
     aspect-ratio: 1;
-    border: solid 1px black;
+    border: solid 3px black;
+    border-radius: 25px;
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto; 
+    align-items: center;
     justify-content: space-around;
     background-color: #fda403;
 }
 
+
 .grid-square {
-    border: solid 1px black;
-    background-color: #c51350;
-    width: 100px;
-    aspect-ratio: 1;
-    border-radius: 25px;
-    margin: 10px;
-    font-size: 3em;
-    text-align: center;
-    transition: transform 1s ease;
+  border: solid 1px black;
+  font-weight: normal;
+  margin: 0;
+  background-color: #c51350;
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 25px;
+  margin: 10px;
+  font-size: 3em;
+  align-items: center;
+  text-align: center;
+  transition: transform 1s ease;
+}
+
+.number{
+  line-height: 100px;
+  color: white;
 }
 
 .turned{
-    transform: rotateX(360deg);
-  }
+  transform: rotateX(360deg);
+}
 
-/* .turnedZ{
-    transform: rotateZ(360deg);
-  } */
-  /* .card.turned .back {
-    transform: rotateY(180deg);
-  } */
 
-.game-finished{
+  /*     MENU & FONT STYLES         */
+.menus{
+  z-index: 1;
   background-color: #c51350;
   margin: auto;
-  width: 90%;
-  height: 90%;
-  align-items: center;
+  width: 480px;
+  aspect-ratio: 1;
   text-align: center;
-  border-radius: 25%;
+  border-radius: 25px;
+  position: absolute;
+  
+}
+
+h3 {
+  font-size: 40px;
+}
+
+.menus h1 {
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 10%;
+  margin: 0;
+  font-size: 80px;
+  font-weight: 600;
+}
+
+.menus h2{
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 30%;
+  margin-bottom: 25%;
+}
+
+/*     BUTTON STYLE         */
+.game-over-buttons{
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 50%;
+}
+
+.timer-buttons{
+  position: absolute;
+  top: 55%;
+  left: 25%;
+  width: 50%;
+}
+
+.buttons{
+  position: absolute;
+  top: 40%;
+  left: 25%;
+  width: 50%;
+}
+
+.instruction-text{
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  width: 80%;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.instruction-button{
+  position: absolute;
+  top: 76%;
+  left: 25%;
+  width: 50%;
+}
+
+.buttons button, .game-over-buttons button, .instruction-button button, .timer-buttons button{
+  font-weight: 400;
+  font-size: 18px;
+   width: 90%;
+   background: #fda403;
+   border-radius: 25px;
+   border: 2px solid #c51350;
+   padding: 17px;
+   margin: 10px
+}
+
+button:hover{
+  border: white 2px solid;
+}
+
+
+  /*     UTILITY CLASSES         */
+
+.fade-out{
+  /* display: none; */
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.hide{
+  display:none
 }

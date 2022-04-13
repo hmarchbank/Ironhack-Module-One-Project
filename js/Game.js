@@ -1,11 +1,10 @@
 class Game {
-    constructor(createGridElement, drawBoard, updateScoreDom) {
+    constructor(createGridElement, drawBoard) {
         this.numbersArray = []
         this.tileArray = []
         this.cardArray = []
         this.createGridElement = createGridElement
         this.drawBoard = drawBoard
-        this.updateScore = updateScoreDom
 
     }
 
@@ -19,9 +18,9 @@ class Game {
     createBoard() {
         for (let i = 0; i < 4; i++) {
             for (let i = 0; i < 4; i++) {
-                let div = this.createGridElement()
-                div.setAttribute('id', `${i}`)
-                this.tileArray.push(div)
+                let h2 = this.createGridElement()
+                h2.setAttribute('id', `${i}`)
+                this.tileArray.push(h2)
             }
         }
         for (let i = 0; i < 7; i++) {
@@ -30,7 +29,7 @@ class Game {
                 i -= 1
                 continue
             } else {
-                var newCard = new Card(this.tileArray, this.updateScore)
+                var newCard = new Card(this.tileArray)
                 this.tileArray[randomIndex].innerText = this.numbersArray.shift()
             }
             this.cardArray.push(newCard)
@@ -42,7 +41,7 @@ class Game {
 }
 
 class Card {
-    constructor(cardArray, updateScore) {
+    constructor(cardArray) {
         this.cardArray = cardArray
         this.topRow = []
         this.secondRow = []
@@ -54,7 +53,6 @@ class Card {
         this.rightColumn = []
         this.highestNumber = 0
         this.score = 0
-        this.updateScore = updateScore
         this.outOfMoveCounter = []
     }
     
@@ -70,7 +68,9 @@ class Card {
         this.newTile(direction)
         this.getClass()
 
-        this.updateScore(this.getScore())
+        this.getScore()
+        document.getElementById('score-el').textContent = this.score
+        document.getElementById('timer-score-el').textContent = this.score
 
         if (this.highestNumber === "2048"){
             document.getElementById('board').innerHTML = `
@@ -116,6 +116,11 @@ class Card {
         this.newTile(direction)
         this.getClass()
 
+        this.getScore()
+        document.getElementById('score-el').textContent = this.score
+        document.getElementById('timer-score-el').textContent = this.score
+        document.getElementById('highestTileEl').textContent = this.highestNumber
+
         // reverts array direction and clears them for next movement
         this.changeArrayDirection()
         this.generateId(this.topRow)
@@ -123,20 +128,9 @@ class Card {
         this.generateId(this.thirdRow)
         this.generateId(this.bottomRow)
 
-        
-        this.updateScore(this.getScore())
-
         if (this.highestNumber === "2048"){
-            document.getElementById('board').innerHTML = `
-            <div class="game-finished">
-                <h1>Congratulations</h1>
-                <h2>You reached 2048</h2>
-                <div class="buttons display">
-                <button>Play Again</button><br>
-                <button>Play in Timer Mode</button>
-                </div>
-            </div>
-            `
+            document.getElementById('scoreEl').textContent = this.score 
+            document.getElementById('victory-menu').classList.toggle('hide')
         }
 
 
@@ -247,21 +241,15 @@ class Card {
             console.log(this.outOfMoveCounter)
         }
         if (this.outOfMoveCounter.length === 4){
-            document.getElementById('board').innerHTML = `
-            <div class="game-finished">
-                <h1>GAME OVER</h1>
-                <h2>Your score was: ${this.score}
-                <div class="buttons display">
-                <button>Try Again</button><br>
-                <button>Play in Timer Mode</button>
-                </div>
-            </div>
-            `
+            console.log("IM IN")
+            document.getElementById('score-el').textContent = this.score 
+            document.getElementById('game-over-menu').classList.remove('hide')
+            
         }
     }
 
     generateNewNumber(){
-        let randomNumber = Math.floor(Math.random() * 100 + 1)
+        let randomNumber = Math.floor(Math.random() * 200 + 1)
         for (let i = 0; i < this.cardArray.length; i++){
             var number = parseInt(this.cardArray[i].textContent)
             if (number > this.highestNumber){
@@ -269,14 +257,14 @@ class Card {
             }
         }
         if (this.highestNumber >= 32){
-            if (randomNumber >= 100){
+            if (randomNumber >= 200){
                 return this.highestNumber / 2
-            } else if (randomNumber >= 98){
+            } else if (randomNumber >= 198){
                 return this.highestNumber / 4
-            } else if (randomNumber >= 96){
+            } else if (randomNumber >= 196){
                 return this.highestNumber / 8
-            } else if (randomNumber >= 93){
-                return this.highestNumber / 16
+            } else if (randomNumber >= 180) {
+                return "4"
             } else {
                 return "2"
             }

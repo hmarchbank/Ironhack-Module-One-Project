@@ -1,19 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="./stylesheet.css" rel="stylesheet">
     <title>2048</title>
 </head>
+
 <body>
-    <div id="board" class="board">
-        
+    <div class="container">
+        <div id="board" class="board">
+            <div id="playing-space" class="board">
+
+            </div>
+            <div id='start-menu' class="menus">
+                <div class="menu-container">
+                    <h1>Twos</h1>
+
+                    <div class="buttons display">
+                        <button id="normal-start-button">Play</button><br>
+                        <button id="timer-button">Timer Mode</button></br>
+                        <button id="instruction-button">Instructions</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="instruction-menu" class="menus hide">
+                <div class="menu-container">
+                    <h3>Instructions</h3>
+                    <div class="instruction-text">
+                        <p>Use the arrow keys or swipe to move the tiles around the grid. When two tiles of the same
+                            value collide they add together.</p>
+                        <p>Normal Mode: Your goal it to reach 2048.</p>
+                        <p>Timer Mode: What's the highest number you can reach in 2 minutes?</p>
+                    </div>
+                    <div class="instruction-button">
+                        <button id="return-button">Return to Menu</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="timer-ending-menu" class="menus hide">
+                <div class="menu-container">
+                    <h3>Time's Up!</h3>
+                    <div class="instruction-text">
+                        <p>You scored: <a id="timer-score-el"><a></p>
+                        <p>Your highest tile was: <a id="highestTileEl"></a></p>
+                        <p>Want to try again?</p>
+                    </div>
+                    <div class="timer-buttons">
+                        <button id="timer-normal">Normal Mode</button>
+                        <button id="timer-timer-mode">Timer Mode</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="victory-menu" class="menus hide">
+                <div class="menu-container">
+                    <h1>Congratulations</h1>
+                    <h2>You reached 2048</h2>
+                    <div class="buttons">
+                        <button id="try-again">Play Again</button><br>
+                        <button id="victory-timer">Timer Mode</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-over-menu" class="menus hide">
+                <div class="menu-container">
+                    <div class='game-over-headings'>
+                        <h1>GAME OVER</h1><br>
+                        <h2>Your score was: <a id="score-el"><a></h2>
+                    </div>
+                    <div class="game-over-buttons">
+                        <button id="try-again-button">Try Again</button><br>
+                        <button id="fail-timer">Play in Timer Mode</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <h3>Score: <a id="score-el"></a></h3>
 
     <script src="./js/Game.js"></script>
     <script src='./js/index.js'></script>
 </body>
+
 </html>

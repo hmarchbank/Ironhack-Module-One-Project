@@ -8,18 +8,18 @@ Add initial numbers DONE
 Getting it moving in one direction DONE
 Get it moving in opposite direction DONE
 Get moving on different axis DONE
-Refactor code 
-Add new cards in direction of movement
+Refactor code DONE
+Add new cards in direction of movement DONE
 
 Stretch goals:
 
 buttons and functionality
 Way of scoring
-add 1 + 2 as initial numbers?
 UX
 Styling?
 Time challenge mode? 
-animation when moving? tile flip
+animation when moving? tile flip - have back of card blank?
+add more colours too cards
 Responsive/work on a phone?
 
 
