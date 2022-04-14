@@ -157,6 +157,8 @@ document.addEventListener('keyup', (even) => {
 
 
 document.addEventListener('swiped', function(e) {
+    e.preventDefault()
+    console.log(e)
     let card = game.cardArray[0]
     switch(e.detail.dir){
         case "left":
