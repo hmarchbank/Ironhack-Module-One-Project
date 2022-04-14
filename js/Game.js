@@ -78,11 +78,13 @@ class Card {
             this.newTile(direction, false)
         }
         this.noMoveCounter = 0
+
         this.getClass()
 
         this.getScore()
         document.getElementById('score-el').textContent = this.score
         document.getElementById('timer-score-el').textContent = this.score
+        document.getElementById('highestTileEl').textContent = this.highestNumber
 
         if (this.highestNumber === "2048"){
             document.getElementById('victory-menu').classList.remove('hide')
@@ -111,8 +113,6 @@ class Card {
         this.generateId(this.midRightColumn)
         this.generateId(this.rightColumn)
 
-
-        // moves rows
         this.moveRows(this.leftColumn, direction, id)
         this.moveRows(this.midLeftColumn, direction, id)
         this.moveRows(this.midRightColumn, direction, id)
@@ -123,9 +123,9 @@ class Card {
         } else {
             this.newTile(direction, false)
         }
+
         this.noMoveCounter = 0
         this.getClass()
-
 
         this.getScore()
         document.getElementById('score-el').textContent = this.score
@@ -143,7 +143,6 @@ class Card {
             document.getElementById('scoreEl').textContent = this.score 
             document.getElementById('victory-menu').classList.toggle('hide')
         }
-
 
         this.leftColumn = []
         this.midLeftColumn = []
@@ -174,8 +173,7 @@ class Card {
         })
     }
 
-    moveRows(row, direction, id) {
-        
+    moveRows(row, direction, id) {  
         if (direction === 'right' || direction === 'down') {
             row.reverse()
         }
@@ -210,28 +208,23 @@ class Card {
     }
 
     newTile(direction, boolean){
-        let counter = 0
         switch (direction) {
             case 'left':
-                this.findEmptySquare(3, direction, this.topRow, this.secondRow, this.thirdRow, this.bottomRow, boolean)
-                // horizontal rows 3
+                this.findEmptySquare(3, this.topRow, this.secondRow, this.thirdRow, this.bottomRow, boolean)
                 break;
             case 'right':
-                this.findEmptySquare(0, direction, this.topRow, this.secondRow, this.thirdRow, this.bottomRow, boolean)
-                // horizontal rows 0
+                this.findEmptySquare(0, this.topRow, this.secondRow, this.thirdRow, this.bottomRow, boolean)
                 break;
             case 'up':
-                this.findEmptySquare(3, direction, this.rightColumn, this.midRightColumn, this.midLeftColumn, this.leftColumn, boolean)
-                // vertical columns 3
+                this.findEmptySquare(3, this.rightColumn, this.midRightColumn, this.midLeftColumn, this.leftColumn, boolean)
                 break;
             case 'down':
-                this.findEmptySquare(0, direction, this.rightColumn, this.midRightColumn, this.midLeftColumn, this.leftColumn, boolean)
-                // vertical columns 0
+                this.findEmptySquare(0, this.rightColumn, this.midRightColumn, this.midLeftColumn, this.leftColumn, boolean)
                 break;
         }
     }
 
-    findEmptySquare(index, direction, arrayOne, arrayTwo, arrayThree, arrayFour, boolean){
+    findEmptySquare(index, arrayOne, arrayTwo, arrayThree, arrayFour, boolean){
         let emptyTileArray = []
         
         if (!arrayOne[index].textContent) {
@@ -318,10 +311,10 @@ class Card {
                     el.style = "background: #ffff00;"
                     break;
                 case '8':
-                    el.style = "background: #00ff00;"
+                    el.style = "background: #fffdd0;"
                     break;
                 case '16':
-                    el.style = "background: #00ffff;"
+                    el.style = "background: #f54287;"
                     break;
                 case '32':
                     el.style = "background: #0000ff;"

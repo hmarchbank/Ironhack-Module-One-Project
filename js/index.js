@@ -122,11 +122,13 @@ function startTimerMode(event){
     newTimer.start()
         
     game.start()
+
     game.cardArray[0].getClass()
         setTimeout(() => {
             menu.classList.toggle('hide')
             menu.classList.toggle('fade-out')
     }, 2000)
+
     setTimeout( () => {
         timerMenu.classList.toggle('hide')
         timer.classList.add('hide')
@@ -155,10 +157,8 @@ document.addEventListener('keyup', (even) => {
     
 // SWIPE INPUTS
 
-
 document.addEventListener('swiped', function(e) {
     e.preventDefault()
-    console.log(e)
     let card = game.cardArray[0]
     switch(e.detail.dir){
         case "left":
