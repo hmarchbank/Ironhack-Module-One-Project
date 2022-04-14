@@ -2,8 +2,7 @@ body {
   font-family: 'Rajdhani', sans-serif;
   background-color: aqua;
   margin: 0 auto;
-  touch-action: none;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   width: 100%;
   position: fixed;
