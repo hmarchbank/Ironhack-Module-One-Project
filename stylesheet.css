@@ -2,7 +2,19 @@ body {
   font-family: 'Rajdhani', sans-serif;
   background-color: aqua;
   margin: 0 auto;
+  touch-action: none;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
 }
+
+/* .lock-screen {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  position: fixed; */
+/* } */
 
 /* TIMER */
 

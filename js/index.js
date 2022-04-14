@@ -158,7 +158,6 @@ document.addEventListener('keyup', (even) => {
 
 document.addEventListener('swiped', function(e) {
     let card = game.cardArray[0]
-    console.log(e.detail.dir); // swipe direction
     switch(e.detail.dir){
         case "left":
             card.moveHorizontally('left', "0")
