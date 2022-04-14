@@ -54,18 +54,30 @@ class Card {
         this.highestNumber = 0
         this.score = 0
         this.outOfMoveCounter = []
+        this.noMoveCounter = 0
+        this.isActive = true
     }
     
     moveHorizontally(direction, id) {
+
+        if (this.isActive === false){
+            return
+        }
         
         this.changeArrayDirection()
 
+        this.moveImpossible = true
         this.moveRows(this.topRow, direction, id)
         this.moveRows(this.secondRow, direction, id)
         this.moveRows(this.thirdRow, direction, id)
         this.moveRows(this.bottomRow, direction, id)
 
-        this.newTile(direction)
+        if (this.noMoveCounter < 16){
+            this.newTile(direction)
+        } else {
+            this.newTile(direction, false)
+        }
+        this.noMoveCounter = 0
         this.getClass()
 
         this.getScore()
@@ -73,20 +85,14 @@ class Card {
         document.getElementById('timer-score-el').textContent = this.score
 
         if (this.highestNumber === "2048"){
-            document.getElementById('board').innerHTML = `
-            <div class="game-finished">
-                <h1>Congratulations</h1>
-                <h2>You reached 2048</h2>
-                <div class="buttons display">
-                <button>Play Again</button><br>
-                <button>Play in Timer Mode</button>
-                </div>
-            </div>
-            `
+            document.getElementById('victory-menu').classList.remove('hide')
         }
     }
     
     moveVertically(direction, id) {
+        if (this.isActive === false){
+            return
+        }
         // prepares arrays for vertical movement
         for (let i = 0; i < this.cardArray.length; i++) {
             if (this.cardArray[i].id === '0') {
@@ -112,9 +118,14 @@ class Card {
         this.moveRows(this.midRightColumn, direction, id)
         this.moveRows(this.rightColumn, direction, id)
         
-
-        this.newTile(direction)
+        if (this.noMoveCounter < 16){
+            this.newTile(direction)
+        } else {
+            this.newTile(direction, false)
+        }
+        this.noMoveCounter = 0
         this.getClass()
+
 
         this.getScore()
         document.getElementById('score-el').textContent = this.score
@@ -164,6 +175,7 @@ class Card {
     }
 
     moveRows(row, direction, id) {
+        
         if (direction === 'right' || direction === 'down') {
             row.reverse()
         }
@@ -173,18 +185,23 @@ class Card {
             }
             if (element.textContent) {
                 if (element.id === id) {
+                    this.noMoveCounter++
                     // make sure the elements can't move out of bounds
                 } else if (row[index].textContent) {
                     if (row[index].textContent === element.textContent) {
                         row[index].classList.toggle("turned")
                         row[index].textContent *= 2
                         element.textContent = ''
+                    } else {
+                        this.noMoveCounter++
                     }
                 } else {
                     row[index].textContent = element.textContent
                     element.textContent = ""
                     
                 }
+            } else {
+                this.noMoveCounter++
             }
         })
         if (direction === 'right' || direction === 'down') {
@@ -192,30 +209,29 @@ class Card {
         }
     }
 
-    newTile(direction){
+    newTile(direction, boolean){
         let counter = 0
         switch (direction) {
             case 'left':
-                this.findEmptySquare(3, direction, this.topRow, this.secondRow, this.thirdRow, this.bottomRow)
+                this.findEmptySquare(3, direction, this.topRow, this.secondRow, this.thirdRow, this.bottomRow, boolean)
                 // horizontal rows 3
                 break;
             case 'right':
-                this.findEmptySquare(0, direction, this.topRow, this.secondRow, this.thirdRow, this.bottomRow)
+                this.findEmptySquare(0, direction, this.topRow, this.secondRow, this.thirdRow, this.bottomRow, boolean)
                 // horizontal rows 0
                 break;
             case 'up':
-                this.findEmptySquare(3, direction, this.rightColumn, this.midRightColumn, this.midLeftColumn, this.leftColumn)
+                this.findEmptySquare(3, direction, this.rightColumn, this.midRightColumn, this.midLeftColumn, this.leftColumn, boolean)
                 // vertical columns 3
                 break;
             case 'down':
-                this.findEmptySquare(0, direction, this.rightColumn, this.midRightColumn, this.midLeftColumn, this.leftColumn)
+                this.findEmptySquare(0, direction, this.rightColumn, this.midRightColumn, this.midLeftColumn, this.leftColumn, boolean)
                 // vertical columns 0
                 break;
         }
     }
 
-    findEmptySquare(index, direction, arrayOne, arrayTwo, arrayThree, arrayFour){
-        console.log()
+    findEmptySquare(index, direction, arrayOne, arrayTwo, arrayThree, arrayFour, boolean){
         let emptyTileArray = []
         
         if (!arrayOne[index].textContent) {
@@ -231,20 +247,25 @@ class Card {
             emptyTileArray.push(arrayFour[index])
         }
         if(emptyTileArray.length > 0){
-            let randomIndex = Math.floor(Math.random() * emptyTileArray.length)
-            emptyTileArray[randomIndex].classList.toggle("turnedZ")
-            emptyTileArray[randomIndex].textContent = this.generateNewNumber()
-            this.outOfMoveCounter = []
-        } else {
-            if (!this.outOfMoveCounter.includes(direction))
-            this.outOfMoveCounter.push(direction)
-            console.log(this.outOfMoveCounter)
-        }
-        if (this.outOfMoveCounter.length === 4){
-            console.log("IM IN")
-            document.getElementById('score-el').textContent = this.score 
-            document.getElementById('game-over-menu').classList.remove('hide')
-            
+            if (boolean === undefined){
+                let randomIndex = Math.floor(Math.random() * emptyTileArray.length)
+                emptyTileArray[randomIndex].textContent = this.generateNewNumber()
+                this.outOfMoveCounter = []
+            }
+        } 
+        let numberOfTiles = []
+        this.cardArray.forEach( element => {
+            if (element.textContent){
+                numberOfTiles.push(element)
+            }
+        })
+        if (numberOfTiles.length === 16){
+            this.isActive = false
+            setTimeout( () => {
+                document.getElementById('score-el').textContent = this.score 
+                document.getElementById('game-over-menu').classList.remove('hide')
+            }, 1500)
+
         }
     }
 
@@ -291,37 +312,37 @@ class Card {
 
             switch (element) {
                 case '2':
-                    el.style = "background: #7C0499"
+                    el.style = "background: #ff0000"
                     break;
                 case '4':
-                    el.style = "background: #00bd56;"
+                    el.style = "background: #ffff00;"
                     break;
                 case '8':
-                    el.style = "background: #FF8787;"
+                    el.style = "background: #00ff00;"
                     break;
                 case '16':
-                    el.style = "background: #4F0A9D;"
+                    el.style = "background: #00ffff;"
                     break;
                 case '32':
-                    el.style = "background: #9fe8fa;"
+                    el.style = "background: #0000ff;"
                     break;
                 case '64':
-                    el.style = "background: #21C458;"
+                    el.style = "background: #ff00ff;"
                     break;
                 case '128':
-                    el.style = "background: #FF912B;"
+                    el.style = "background: #80ff00;"
                     break;
                 case '256':
-                    el.style = "background: 3d6cb9;"
+                    el.style = "background: #00ff80;"
                     break;
                 case '512':
-                    el.style = "background: CE0042;"
+                    el.style = "background: #0080ff;"
                     break;
                 case '1024':
-                    el.style = "background: #009C65;"
+                    el.style = "background: #8000ff;"
                     break;
                 case '2048':
-                    el.style = "background: #E8D300;"
+                    el.style = "background: #ff0080;"
                     break;
                 default:
                     el.style = "background: #c51350;"
