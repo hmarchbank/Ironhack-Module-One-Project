@@ -250,7 +250,8 @@ button:hover {
   
   p {
     margin-top: 15px;
-    font-size: 14px; 
+    font-size: 14px;
+    line-height: 10px;
   }
 
   .grid-square{
@@ -262,6 +263,15 @@ button:hover {
 
   .menus h1 {
     font-size: 35px;
+  }
+
+  .button {
+    color: black;
+  }
+
+  #return-button{
+    margin-top: 10px;
+    font-size: 13px;
   }
 
   .menus h2 {
