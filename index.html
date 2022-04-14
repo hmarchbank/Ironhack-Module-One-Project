@@ -18,9 +18,10 @@
             <div id="playing-space" class="board">
 
             </div>
+
             <div id='start-menu' class="menus">
                 <div class="menu-container">
-                    <h1>Twos</h1>
+                    <h1>TWOS</h1>
 
                     <div class="buttons display">
                         <button id="normal-start-button">Play</button><br>
@@ -33,7 +34,7 @@
 
             <div id="instruction-menu" class="menus hide">
                 <div class="menu-container">
-                    <h3>Instructions</h3>
+                    <h3>INSTRUCTIONS</h3>
                     <div class="instruction-text">
                         <p>Use the arrow keys or swipe to move the tiles around the grid. When two tiles of the same
                             value collide they add together.</p>
@@ -48,7 +49,7 @@
 
             <div id="timer-ending-menu" class="menus hide">
                 <div class="menu-container">
-                    <h3>Time's Up!</h3>
+                    <h3>TIME'S UP!</h3>
                     <div class="instruction-text">
                         <p>You scored: <a id="timer-score-el"><a></p>
                         <p>Your highest tile was: <a id="highestTileEl"></a></p>
@@ -61,12 +62,12 @@
                 </div>
             </div>
 
-            <div id="victory-menu" class="menus hide">
+            <div id="victory-menu" class="menus victory hide">
                 <div class="menu-container">
                     <h1>Congratulations</h1>
                     <h2>You reached 2048</h2>
-                    <div class="buttons">
-                        <button id="try-again">Play Again</button><br>
+                    <div class="game-over-buttons">
+                        <button id="victory-normal">Play Again</button><br>
                         <button id="victory-timer">Timer Mode</button>
                     </div>
                 </div>
@@ -86,9 +87,15 @@
             </div>
 
         </div>
+        <div class="timer hide" id="timer">
+            <h1>Timer</h1>
+            <h2><a id="minutes">02</a>:<a id="seconds">00</a></h2>
+        </div>
+
     </div>
 
     <script src="./js/Game.js"></script>
+    <script src="./js/Timer.js"></script>
     <script src='./js/index.js'></script>
 </body>
 

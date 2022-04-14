@@ -291,37 +291,37 @@ class Card {
 
             switch (element) {
                 case '2':
-                    el.style = "background: #3d6cb9"
+                    el.style = "background: #7C0499"
                     break;
                 case '4':
                     el.style = "background: #00bd56;"
                     break;
                 case '8':
-                    el.style = "background: #f9fd50;"
+                    el.style = "background: #FF8787;"
                     break;
                 case '16':
-                    el.style = "background: #26baee;"
+                    el.style = "background: #4F0A9D;"
                     break;
                 case '32':
                     el.style = "background: #9fe8fa;"
                     break;
                 case '64':
-                    el.style = "background: green;"
+                    el.style = "background: #21C458;"
                     break;
                 case '128':
-                    el.style = "background: green;"
+                    el.style = "background: #FF912B;"
                     break;
                 case '256':
-                    el.style = "background: green;"
+                    el.style = "background: 3d6cb9;"
                     break;
                 case '512':
-                    el.style = "background: green;"
+                    el.style = "background: CE0042;"
                     break;
                 case '1024':
-                    el.style = "background: green;"
+                    el.style = "background: #009C65;"
                     break;
                 case '2048':
-                    el.style = "background: green;"
+                    el.style = "background: #E8D300;"
                     break;
                 default:
                     el.style = "background: #c51350;"

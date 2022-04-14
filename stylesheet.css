@@ -1,28 +1,50 @@
-
-
 body {
   font-family: 'Rajdhani', sans-serif;
   background-color: aqua;
+  margin: 0 auto;
+}
+
+/* TIMER */
+
+.timer {
+  width: 500px;
+  background-color: #fda403;
+  margin: 10px auto;
+  text-align: center;
+  border-radius: 50px;
+  border: 3px solid black;
+  font-size: 30px
+}
+
+.timer h1,
+.timer h2 {
+  padding: 0;
+  margin: 0;
+}
+
+.timer h1 {
+  font-size: 3rem;
 }
 
 
-  /*     GAME STYLES        */
 
-  .container{
-    margin: 50px auto;
-  }
+/*     GAME STYLES        */
+
+.container {
+  margin: 30px auto 0 auto;
+}
 
 .board {
-    width: 500px;
-    aspect-ratio: 1;
-    border: solid 3px black;
-    border-radius: 25px;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto; 
-    align-items: center;
-    justify-content: space-around;
-    background-color: #fda403;
+  border: solid 3px black;
+  width: 500px;
+  aspect-ratio: 1;
+  border-radius: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fda403;
 }
 
 
@@ -38,21 +60,35 @@ body {
   font-size: 3em;
   align-items: center;
   text-align: center;
-  transition: transform 1s ease;
+  transition: transform 0.5s ease;
 }
 
-.number{
+.turned {
+  transform: rotateX(360deg);
+  backface-visibility: hidden;
+}
+
+.number {
   line-height: 100px;
   color: white;
 }
 
-.turned{
-  transform: rotateX(360deg);
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 
-  /*     MENU & FONT STYLES         */
-.menus{
+
+/*     MENU & FONT STYLES         */
+.menus {
   z-index: 1;
   background-color: #c51350;
   margin: auto;
@@ -61,7 +97,7 @@ body {
   text-align: center;
   border-radius: 25px;
   position: absolute;
-  
+
 }
 
 h3 {
@@ -69,6 +105,8 @@ h3 {
 }
 
 .menus h1 {
+  background-color: #fda403;
+  border-radius: 25px;
   position: absolute;
   width: 80%;
   left: 10%;
@@ -78,7 +116,16 @@ h3 {
   font-weight: 600;
 }
 
-.menus h2{
+.menus h3 {
+  background-color: #fda403;
+  position: absolute;
+  width: 80%;
+  left: 10%;
+  top: 3%;
+  border-radius: 20px;
+}
+
+.menus h2 {
   position: absolute;
   width: 80%;
   left: 10%;
@@ -87,28 +134,36 @@ h3 {
 }
 
 /*     BUTTON STYLE         */
-.game-over-buttons{
+.game-over-buttons {
   position: absolute;
   top: 50%;
   left: 25%;
   width: 50%;
 }
 
-.timer-buttons{
+.victory h1 {
+  font-size: 60px;
+}
+
+.victory h2 {
+  top: 25%;
+}
+
+.timer-buttons {
   position: absolute;
   top: 55%;
   left: 25%;
   width: 50%;
 }
 
-.buttons{
+.buttons {
   position: absolute;
   top: 40%;
   left: 25%;
   width: 50%;
 }
 
-.instruction-text{
+.instruction-text {
   position: absolute;
   top: 25%;
   left: 10%;
@@ -117,39 +172,41 @@ h3 {
   font-size: 20px;
 }
 
-.instruction-button{
+.instruction-button {
   position: absolute;
   top: 76%;
   left: 25%;
   width: 50%;
 }
 
-.buttons button, .game-over-buttons button, .instruction-button button, .timer-buttons button{
+.buttons button,
+.game-over-buttons button,
+.instruction-button button,
+.timer-buttons button {
   font-weight: 400;
   font-size: 18px;
-   width: 90%;
-   background: #fda403;
-   border-radius: 25px;
-   border: 2px solid #c51350;
-   padding: 17px;
-   margin: 10px
+  width: 90%;
+  background: #fda403;
+  border-radius: 25px;
+  border: 2px solid #c51350;
+  padding: 17px;
+  margin: 10px
 }
 
-button:hover{
+button:hover {
   border: white 2px solid;
 }
 
 
-  /*     UTILITY CLASSES         */
+/*     UTILITY CLASSES         */
 
-.fade-out{
-  /* display: none; */
+.fade-out {
   z-index: 2;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s 1s, opacity 1s linear;
 }
 
-.hide{
-  display:none
+.hide {
+  display: none
 }

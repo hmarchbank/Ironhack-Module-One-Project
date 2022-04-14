@@ -1,12 +1,12 @@
 const startBtn = document.getElementById('normal-start-button')
-const instructionButton = document.getElementById("instruction-button")
+const startTimer = document.getElementById('timer-button')
 const timerModeButton = document.getElementById("timer-mode-button")
+const instructionButton = document.getElementById("instruction-button")
 const tryAgainButton = document.getElementById('try-again-button')
 const returnButton = document.getElementById('return-button')
-const startTimer = document.getElementById('timer-button')
-const victoryTimer = document.getElementById('victory-timer')
 const failTimer = document.getElementById('fail-timer')
-
+const victoryNormal = document.getElementById('victory-normal')
+const victoryTimer = document.getElementById('victory-timer')
 const timerNormalButton = document.getElementById('timer-normal')
 const timerTimerButton = document.getElementById('timer-timer-mode')
 
@@ -20,8 +20,9 @@ const victoryMenu = document.getElementById("victory-menu")
 const instructionMenu = document.getElementById('instruction-menu')
 const timerMenu = document.getElementById('timer-ending-menu')
 
-
-let game = new Game(createGridElement, drawBoard)
+const timerMinutes = document.getElementById('minutes')
+const timerSeconds = document.getElementById('seconds')
+const timer = document.getElementById('timer')
 
 
 function createGridElement(number, id){
@@ -37,8 +38,6 @@ function createGridElement(number, id){
     if (id){
         h2.setAttribute('id', id)
     }
-    console.log(h2)
-    // div.appendChild(h2)
     return h2
 }
 
@@ -49,94 +48,35 @@ function drawBoard(tileArray){
     });
 }
 
+// NORMAL MODE STARTS
+startBtn.addEventListener('click', startNormal)
+startBtn.menu = startMenu
 
+tryAgainButton.addEventListener('click', startNormal)
+tryAgainButton.menu = gameOverMenu
 
+timerNormalButton.addEventListener('click', startNormal)
+timerNormalButton.menu = timerMenu
+        
 
+victoryNormal.addEventListener('click', startNormal)
+victoryNormal.menu = victoryMenu
 
-startBtn.addEventListener('click', () => {
-    startMenu.classList.toggle('fade-out')
-    game.start()
-    game.cardArray[0].getClass()
-        setTimeout(() => {
-            startMenu.classList.toggle('hide')
-    }, 2000)
-})
-
-startTimer.addEventListener('click', () => {
-    console.log('clicked')
-    startMenu.classList.toggle('fade-out')
-    game.start()
-    game.cardArray[0].getClass()
-        setTimeout(() => {
-            startMenu.classList.toggle('hide')
-    }, 2000)
-    console.log(instructionMenu)
-    setTimeout( () => {
-        timerMenu.classList.toggle('hide')
-    },120000)
-})
-
-
-
-tryAgainButton.addEventListener('click', () => {
-    gameOverMenu.classList.toggle('fade-out')
+function startNormal(event){
+    let menu = event.currentTarget.menu
+    menu.classList.toggle('fade-out')
     playingSpace.innerHTML = ''
     game = new Game(createGridElement, drawBoard)
     game.start()
     game.cardArray[0].getClass()
         setTimeout(() => {
-            gameOverMenu.classList.add('hide')
-            gameOverMenu.classList.toggle('fade-out')
+            menu.classList.add('hide')
+            menu.classList.toggle('fade-out')
     }, 2000)
-
-})
-
-timerNormalButton.addEventListener('click', () => {
-    timerMenu.classList.toggle('fade-out')
-    playingSpace.innerHTML = ''
-    game = new Game(createGridElement, drawBoard)
-    game.start()
-    game.cardArray[0].getClass()
-        setTimeout(() => {
-            timerMenu.classList.add('hide')
-            timerMenu.classList.toggle('fade-out')
-    }, 2000)
-})
-
-timerTimerButton.addEventListener('click', () => {
-    timerMenu.classList.toggle('fade-out')
-    playingSpace.innerHTML = ''
-    game = new Game(createGridElement, drawBoard)
-    game.start()
-    game.cardArray[0].getClass()
-        setTimeout(() => {
-            timerMenu.classList.toggle('fade-out')
-            timerMenu.classList.toggle('hide')
-    }, 2000)
-    console.log(instructionMenu)
-    setTimeout( () => {
-        timerMenu.classList.toggle('hide')
-    },120000)
-})
-
-failTimer.addEventListener('click', () => {
-    gameOverMenu.classList.toggle('fade-out')
-    playingSpace.innerHTML = ''
-    game = new Game(createGridElement, drawBoard)
-    game.start()
-    game.cardArray[0].getClass()
-        setTimeout(() => {
-            gameOverMenu.classList.toggle('fade-out')
-            gameOverMenu.classList.toggle('hide')
-    }, 2000)
-    console.log(instructionMenu)
-    setTimeout( () => {
-        timerMenu.classList.toggle('hide')
-    },120000)
-})
+}
 
 
-
+// INSTRUCTION BUTTONS
 instructionButton.addEventListener('click', () => {
     startMenu.classList.toggle('fade-out')
     instructionMenu.classList.toggle('hide')
@@ -156,17 +96,45 @@ returnButton.addEventListener('click', () => {
 
 
 
-// instructionButton.addEventListener('click', () => {
-//     startMenu.classList.toggle('fade-out')
-//     game.cardArray[0].getClass()
-//         setTimeout(() => {
-//             instru.classList.toggle('hide')
-//     }, 2000)
-// }) 
-/* NEED TO CREATE THE bloody thing*/
+
+// TIMER STARTS
+startTimer.addEventListener('click', startTimerMode)
+startTimer.menu = startMenu
+
+timerTimerButton.addEventListener('click', startTimerMode)
+timerTimerButton.menu = timerMenu
+
+failTimer.addEventListener('click', startTimerMode)
+failTimer.menu = gameOverMenu
+
+victoryTimer.addEventListener('click', startTimerMode)
+victoryTimer.menu = victoryMenu
+
+function startTimerMode(event){
+    let menu = event.currentTarget.menu
+    menu.classList.toggle('fade-out')
+    playingSpace.innerHTML = ''
+
+    game = new Game(createGridElement, drawBoard)
+    
+    newTimer = new Timer(timerMinutes, timerSeconds)
+    timer.classList.remove('hide')
+    newTimer.start()
+        
+    game.start()
+    game.cardArray[0].getClass()
+        setTimeout(() => {
+            menu.classList.toggle('hide')
+            menu.classList.toggle('fade-out')
+    }, 2000)
+    setTimeout( () => {
+        timerMenu.classList.toggle('hide')
+        timer.classList.add('hide')
+    },120000)
+}
 
 
-
+// KEY INPUTS
 document.addEventListener('keyup', (even) => {
     let card = game.cardArray[0]
     switch(event.key){
