@@ -1,7 +1,15 @@
+html{
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+  position: fixed;
+}
+
 body {
   font-family: 'Rajdhani', sans-serif;
   background-color: aqua;
   margin: 0 auto;
+
   height: 100vh;
   overflow: hidden;
   width: 100%;
