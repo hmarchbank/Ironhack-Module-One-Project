@@ -128,10 +128,11 @@ function startTimerMode(event){
             menu.classList.toggle('hide')
             menu.classList.toggle('fade-out')
     }, 2000)
-
     setTimeout( () => {
         timerMenu.classList.toggle('hide')
         timer.classList.add('hide')
+        game.cardArray[0].isActive = false
+        
     },120000)
 }
 
